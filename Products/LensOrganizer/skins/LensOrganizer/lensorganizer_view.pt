@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<tal:border define="is_editable python:request.set('disable_border', 1)" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="rhaptos"
+      metal:use-macro="here/main_template/macros/master">
+
+<head>
+</head>
+
+<body>
+  <td id="portal-column-one" metal:fill-slot="column_one_slot">
+    <div class="visualPadding">
+      <metal:macro use-macro="here/workspaces_slot/macros/portlet" />
+    </div>
+  </td>
+
+  <div metal:fill-slot="main">
+
+    <style type="text/css">
+      #lensorganizer_edit_view_toggle{
+        font-size: .625em;
+        color: black;
+        font-weight: normal;
+      }
+
+      #lensorganizer_edit_view_toggle a{
+        color: #369 !important;
+        text-decoration: underline;
+      }
+    </style>
+
+    <h1>
+      <tal:dacct content="context/Title">Great Stuff Here</tal:dacct>
+      <span id="lensorganizer_edit_view_toggle" tal:condition="python:user.has_permission('Modify portal content', context)">
+         <span>(<a tal:attributes="href string:${context/absolute_url}/edit">edit lens organizer</a>)</span>
+      </span> 
+    </h1>
+
+    <div metal:define-macro="body" 
+         tal:define="lenses here/getLenses">
+      <ul tal:condition="lenses">
+        <li tal:repeat="lens lenses">
+          <a tal:attributes="href lens/absolute_url"
+             tal:content="lens/Title">title</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</body>
+</html>
