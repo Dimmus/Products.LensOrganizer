@@ -48,6 +48,7 @@
         <li tal:repeat="lens lenses">
           <a tal:attributes="href lens/absolute_url"
              tal:content="lens/Title">title</a>
+          (<a tal:attributes="href python:'%s/contents' % lens.absolute_url()">edit</a>)
         </li>
       </ul>
     </div>
