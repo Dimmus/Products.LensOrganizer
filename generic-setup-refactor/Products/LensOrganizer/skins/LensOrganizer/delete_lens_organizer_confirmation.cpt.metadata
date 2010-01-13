@@ -1,0 +1,11 @@
+[default]
+title=Delete Lens Organizer Confirmation
+
+[validators]
+validators=
+validators..Cancel=
+
+[actions]
+action.success=traverse_to:string:object_delete
+action.success..Cancel=redirect_to_action:string:edit
+action.failure=traverse_to:delete_lens_organizer_confirmation

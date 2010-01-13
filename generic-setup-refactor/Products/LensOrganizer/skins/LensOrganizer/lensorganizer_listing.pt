@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<tal:border define="is_editable python:request.set('disable_border', 1)" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="rhaptos"
+      metal:use-macro="here/main_template/macros/master">
+
+<head>
+</head>
+
+<body>
+
+  <td id="portal-column-one" class="lens-left-column" metal:fill-slot="column_one_slot">
+    <div class="visualPadding">
+      <metal:macro use-macro="here/portlet_lenses/macros/portlet" />
+      <metal:macro use-macro="here/portlet_recentview/macros/portlet" />
+    </div>
+  </td>
+  <metal:left fill-slot="column_two_slot"/>
+
+  <div metal:fill-slot="main"
+         tal:define="creatorName context/getOwnerName;">
+
+    <h1>
+      <img src="/lenses.gif" alt="Lenses Icon" i18n:attributes="alt text_lenses_icon" />
+      <span i18n:translate="heading_content_lenses" tal:omit-tag="">
+          <span i18n:name="name" tal:omit-tag="" tal:content="creatorName">Me!</span> Lenses
+      </span>
+    </h1>
+
+    <p tal:content="structure context/@@lensorganizer.siyavula-bio">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis, felis porttitor ultrices auctor, nisi erat tempus sapien, eget aliquet tortor libero non felis. Ut justo. Nullam a odio. Nulla dapibus pretium justo. Cras bibendum consequat orci. Sed pellentesque aliquet neque. Nulla malesuada eleifend nibh. Quisque sed lectus ut urna dignissim blandit. Phasellus molestie. Sed urna turpis, tincidunt a, fringilla ac, interdum ac, nisl. Proin luctus, risus non imperdiet tincidunt, pede eros consequat nunc, ac suscipit ligula purus vitae est. Vestibulum rhoncus elit volutpat lorem. Morbi semper posuere velit. Vestibulum tempor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean nisl. Sed molestie libero non turpis. Morbi sed nunc. Aenean velit. Nam nisi mi, fringilla sed, sollicitudin id, lacinia eget, velit. 
+    </p>
+
+    <div metal:define-macro="body" 
+         tal:define="organizers python:context.restrictedTraverse('@@lensorganizers')() or None;
+                     organizers python:organizers and [b.getObject() for b in organizers] or None;
+                     standard_module modules/Products/PythonScripts/standard">
+      <tal:organizers tal:condition="organizers" repeat="organizer organizers">
+        <tal:emptyorganiser define="lenses organizer/getPublicOpenLenses"
+                            condition="lenses">
+          <h2 tal:content="organizer/pretty_title_or_id"></h2>
+          <tal:description define="description python:standard_module.newline_to_br(organizer.Description())">
+          <p tal:content="structure description" tal:condition="description"></p>
+          </tal:description>
+
+          <table class="listing lensorganizer">
+            <tr>
+              <th rowspan="2">Lens Title</th>
+              <th rowspan="2">Lens Type</th>
+              <th colspan="2">Modules and Collections Added to Lens</th>
+            </tr>
+            <tr>
+              <th>Total</th>
+              <th>Approved</th>
+            </tr>
+
+            <tr tal:repeat="lens lenses"
+                tal:attributes="class python:test(path('repeat/lens/odd'),'even','odd');">
+              <tal:block tal:define="lensCat       python:lens.getCategory();
+                                     isMemberList  python:lensCat == 'List';">
+                <td>
+                  <a tal:attributes="href lens/absolute_url"
+                     tal:content="lens/pretty_title_or_id"></a>
+                </td>
+                <td tal:condition="not:isMemberList" tal:content="lensCat"/>
+                <td tal:condition="isMemberList">Member list</td>
+                <td tal:content="python:len(lens.listOfEntries())" class="number"/>
+                <td tal:content="python:len(lens.listOfEntries(approved=True))" class="number"/>
+              </tal:block>
+            </tr>
+          </table>
+        </tal:emptyorganiser>
+
+      </tal:organizers>
+<!--
+        <ul tal:condition="nocall:organizers">
+            <li tal:repeat="organizer organizers">
+            <a tal:attributes="href python:organizer.getObject().absolute_url()+ '/lensorganizer_view'"
+            tal:content="organizer/Title"/>
+            </li>
+        </ul>
+-->
+    </div>
+</div>
+</body>
+</html>

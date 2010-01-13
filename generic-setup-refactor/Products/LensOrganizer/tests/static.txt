@@ -1,0 +1,22 @@
+Static Implementation Tests
+===========================
+ 	
+Let's just make sure that our static views are working as expected.
+	
+The first thing we need to do is to make sure the interfaces are
+being correctly implemented::
+ 	
+    >>> from Products.LensOrganizer.content.LensOrganizer import LensOrganizer
+    >>> LensOrganizer.meta_type == 'LensOrganizer'
+    True
+    >>> LensOrganizer.portal_type == 'LensOrganizer'
+    True
+    >>> LensOrganizer.typeDescription == 'LensOrganizer'
+    True
+    >>> LensOrganizer.typeDescMsgId == 'description_edit_lensorganizer'
+    True
+    >>> LensOrganizer.immediate_view == 'lensorganizer_view'
+    True
+    >>> LensOrganizer.default_view == 'lensorganizer_view'
+    True
+

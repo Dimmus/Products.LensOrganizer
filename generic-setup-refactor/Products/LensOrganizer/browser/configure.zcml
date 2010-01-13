@@ -1,0 +1,19 @@
+<configure xmlns="http://namespaces.zope.org/zope" 
+           xmlns:browser="http://namespaces.zope.org/browser" 
+           xmlns:five="http://namespaces.zope.org/five"> 
+  
+  <browser:page
+        for="*"
+        name="lensorganizers"
+        class=".lensorganizers.LensOrganizersView"
+        permission="zope2.View"
+        />
+
+  <browser:page
+        for="*"
+        name="lensorganizer.siyavula-bio"
+        class=".lensorganizers.SiyavulaBioView"
+        permission="zope2.View"
+        />
+
+</configure>

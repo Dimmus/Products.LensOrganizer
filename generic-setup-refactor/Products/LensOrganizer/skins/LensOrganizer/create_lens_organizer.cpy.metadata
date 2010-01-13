@@ -1,0 +1,6 @@
+[default]
+title=Lens Organizer Edit Script
+proxy=Manager,Anonymous
+
+[actions]
+action.success=traverse_to:string:lens_organizer_prefill
