@@ -1,0 +1,3 @@
+LensOrganizer-0.3
+ - generic setup refactor. Rhaptos 2.0 release
+
