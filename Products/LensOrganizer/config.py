@@ -37,25 +37,13 @@ __docformat__ = 'plaintext'
 # AppConfig.py in your product's root directory. This will be included
 # in this file if found.
 
-try: # New CMF
-    from Products.CMFCore.permissions import setDefaultRoles 
-except ImportError: # Old CMF
-    from Products.CMFCore.CMFCorePermissions import setDefaultRoles
-
+from Products.CMFCore.permissions import setDefaultRoles 
 
 ##code-section config-head #fill in your manual code here
 ##/code-section config-head
 
 
 PROJECTNAME = "LensOrganizer"
-
-# Check for Plone 2.1
-try:
-    from Products.CMFPlone.migrations import v2_1
-except ImportError:
-    HAS_PLONE21 = False
-else:
-    HAS_PLONE21 = True
 
 # Permissions
 DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"

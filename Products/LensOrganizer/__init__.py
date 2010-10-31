@@ -51,11 +51,6 @@ import os, os.path
 from Globals import package_home
 from Products.CMFCore import utils as cmfutils
 
-try: # New CMF
-    from Products.CMFCore import permissions as CMFCorePermissions 
-except: # Old CMF
-    from Products.CMFCore import CMFCorePermissions
-
 from Products.CMFCore import DirectoryView
 from Products.CMFPlone.utils import ToolInit
 from Products.Archetypes.atapi import *
