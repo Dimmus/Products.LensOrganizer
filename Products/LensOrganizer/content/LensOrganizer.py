@@ -9,8 +9,6 @@ Public License Version 2.1 (LGPL).  See LICENSE.txt for details.
 
 """
 
-from zope.interface import implements
-
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.LensOrganizer.config import *
@@ -61,7 +59,6 @@ class LensOrganizer(BaseContent):
     lensfolder
     """
     security = ClassSecurityInfo()
-    implements(getattr(BaseContent,'__implements__',()),)
 
     # This name appears in the 'add' box
     archetype_name = 'Lens Organizer'
