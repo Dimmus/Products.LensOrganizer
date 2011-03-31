@@ -1,3 +1,6 @@
+LensOrganizer-0.3.1
+ - license text
+
 LensOrganizer-0.3
  - generic setup refactor. Rhaptos 2.0 release
 
