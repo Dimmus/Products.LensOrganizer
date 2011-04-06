@@ -27,6 +27,7 @@
 
           <input type="hidden"
                  name="form.submitted"
+                 <input tal:replace="structure context/@@authenticator/authenticator" />
                  value="1"
                  />
 
